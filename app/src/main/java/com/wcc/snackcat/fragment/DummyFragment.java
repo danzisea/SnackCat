@@ -65,15 +65,17 @@ public class DummyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
     Bundle savedInstanceState) {
-        Log.i(TAG, "---->>onCreateView: " + tabIndex);
-
-
-        View view = inflater.inflate(R.layout.fragment_dummy, container, false);
-        //初始化View
-        textView_dummyfragment_info = (TextView) view.findViewById(R.id
-                .textView_dummyfragment_info);
-        textView_empty = (TextView) view.findViewById(R.id.textView_empty);
-        listView_dummyfragment = (ListView) view.findViewById(R.id.listView_dummyfragment);
+        View view = null;
+        switch (tabIndex) {
+            case 0:
+                view = inflater.inflate(R.layout.fragment_dummy, container, false);
+                //初始化View
+                textView_dummyfragment_info = (TextView) view.findViewById(R.id
+                        .textView_dummyfragment_info);
+                textView_empty = (TextView) view.findViewById(R.id.textView_empty);
+                listView_dummyfragment = (ListView) view.findViewById(R.id.listView_dummyfragment);
+                break;
+        }
         return view;
     }
 
