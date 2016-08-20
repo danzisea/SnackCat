@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -36,11 +37,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Context mContext = this;//初始化上下文环境
-    private RadioGroup radioGroup_main_tab;//声明RadioGroup控件
-    private RadioButton button_homepage;//推荐按钮
-    private RadioButton button_hot_sale;//书架按钮
-    private RadioButton button_special_topic;//分享按钮
-    private RadioButton button_MyCat;//更多按钮
+    private Button btn_main_home;//主页
+    private Button btn_main_hot_sale;//热卖
+    private Button btn_main_topic;//专题
+    private Button btn_main_person;//个人
     private FragmentManager manager=null;
     private List<Fragment> fragments=new ArrayList<>();
 
@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        radioGroup_main_tab = (RadioGroup) findViewById(R.id.radioGroup_main_tab);
     }
 
     private void initData() {
@@ -150,48 +149,59 @@ public class MainActivity extends AppCompatActivity
      */
     private void initTabs() {
         //初始化RadioButton
-        button_homepage = (RadioButton) findViewById(R.id.button_homepage);
-        button_hot_sale = (RadioButton) findViewById(R.id.button_hot_sale);
-        button_special_topic = (RadioButton) findViewById(R.id.button_special_topic);
-        button_MyCat = (RadioButton) findViewById(R.id.button_MyCat);
-        //将单选按钮设置成透明
-        button_homepage.setButtonDrawable(android.R.color.transparent);
-        button_hot_sale.setButtonDrawable(android.R.color.transparent);
-        button_special_topic.setButtonDrawable(android.R.color.transparent);
-        button_MyCat.setButtonDrawable(android.R.color.transparent);
-        //设置第一个RadioButton默认选中
-        button_homepage.setChecked(true);
+        btn_main_home = (Button) findViewById(R.id.btn_main_home);
+        btn_main_hot_sale = (Button) findViewById(R.id.btn_main_hot_sale);
+        btn_main_topic = (Button) findViewById(R.id.btn_main_topic);
+        btn_main_person = (Button) findViewById(R.id.btn_main_person);
+        //设置第一个Button默认选中
+        btn_main_home.setSelected(true);
         //按钮的点击事件
-        button_homepage.setOnClickListener(new View.OnClickListener() {
+        btn_main_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //主页面推荐碎片
                 FragmentHelper.switchFragment(manager, fragments, 0, R.id.layout_container,
                         0, 0);
+                btn_main_home.setSelected(true);
+                btn_main_hot_sale.setSelected(false);
+                btn_main_topic.setSelected(false);
+                btn_main_person.setSelected(false);
             }
         });
-        button_hot_sale.setOnClickListener(new View.OnClickListener() {
+        btn_main_hot_sale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //主页面书架碎片
                 FragmentHelper.switchFragment(manager, fragments, 1, R.id.layout_container,
                         0, 0);
+                btn_main_hot_sale.setSelected(true);
+                btn_main_topic.setSelected(false);
+                btn_main_home.setSelected(false);
+                btn_main_person.setSelected(false);
             }
         });
-        button_special_topic.setOnClickListener(new View.OnClickListener() {
+        btn_main_topic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //主页面分类碎片
                 FragmentHelper.switchFragment(manager, fragments, 2, R.id.layout_container,
                         0, 0);
+                btn_main_topic.setSelected(true);
+                btn_main_home.setSelected(false);
+                btn_main_hot_sale.setSelected(false);
+                btn_main_person.setSelected(false);
             }
         });
-        button_MyCat.setOnClickListener(new View.OnClickListener() {
+        btn_main_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //主页面更多碎片
                 FragmentHelper.switchFragment(manager, fragments, 3, R.id.layout_container,
                         0, 0);
+                btn_main_person.setSelected(true);
+                btn_main_topic.setSelected(false);
+                btn_main_home.setSelected(false);
+                btn_main_hot_sale.setSelected(false);
             }
         });
     }
